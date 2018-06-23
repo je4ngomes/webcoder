@@ -10,7 +10,7 @@ body {
 
 /*Header and nav*/
 .header {
-    background: url(../img/index/header.jpg) center no-repeat;
+    background: url(../img/header.jpg) center no-repeat;
     background-size: cover;
     width: 100%;
     height: 15rem;
@@ -25,6 +25,24 @@ body {
     position: relative;
     left: 3rem;
     top: 30%;
+}
+
+.signin a {
+    color: #fff;
+    position: absolute;
+    top: 3px;
+    text-decoration: none;
+    font-weight: bold;
+    right: 10px;
+    padding: 10px 30px;
+    background: #3f3f3f;
+    transition: 0.5s;
+}
+
+.signin a:hover {
+    color: #252525;
+    background: #eeeeee;
+    transition: 0.5s;
 }
 
 .navbar ul li {
@@ -45,31 +63,11 @@ body {
 }
 
 .navbar li a {
-    padding: 15px;
+    padding: 0px 15px;
     text-decoration: none;
     color: #fff; 
+    
 }
-
-.toggle-btn {
-    color: #fff;
-    display: none;
-}
-
-.toggle-btn-visible {
-    display: block;
-}
-
-.toggle-target-hidden {
-    display: none;
-}
-
-.toogle-target-expanded {
-    display: block;
-}
-
-
-
-
 
 form {
     position: relative;
@@ -98,17 +96,16 @@ form {
     font-size: 15pt;
     position: absolute;
     right: 2.5rem;
+    cursor: pointer;
     line-height: 50px;
 }
 
 .search button:hover {
     color: #000000;
+    transition: 0.4s;
 }
 
 
-.navbar li a:hover {
-    color: #ffffff70;
-}
 
 /* End Header and nav*/
 
@@ -118,7 +115,7 @@ main {
 }
 
 
-.recent {
+.main__title {
     margin-bottom: 10px;
     color: white;
     text-transform: uppercase;
@@ -127,7 +124,7 @@ main {
     border-bottom: 2px solid rgba(110, 110, 110, 0.671);
 }
 
-.recent h1 {
+.main__title h1 {
     margin-bottom: 5px;
 }
 
@@ -183,6 +180,12 @@ main {
 
 .btn:hover {
     background: #383838;
+}
+
+.noposts {
+    color: white;
+    font-size: 12pt;
+    margin-bottom: 10rem;
 }
 
 /*End Main Content*/

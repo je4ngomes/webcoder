@@ -1,0 +1,157 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.login__page {
+    width: 360px;
+    background: #252525;
+    margin: 10rem auto 0;
+    border: 3px solid #1a1a1a;
+}
+
+.forms {
+    width: 100%;
+    padding: 50px;
+    box-sizing: border-box;
+    margin: 0 0 0 10px;
+}
+
+.signin, .signup  button {
+    display: block;
+}
+
+.disabled {
+    display: none;
+    transition: 1s;
+}
+
+
+.signin input, .signup input {
+    width: 250px;
+    height: 40px;
+    margin-bottom: 10px;
+    border: none;
+    color: #fff;
+    background: #b6b6b68c;
+    font-size: 14pt;
+    padding-left: 35px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+.signin input[type="password"], 
+.signup input[type="password"] {
+    padding-right: 30px;
+}
+
+.signin, .signup {
+    position: relative;
+}
+
+/*ICONS*/
+
+.fa-user,
+.fa-key,
+.fa-eye,
+.fa-redo,
+.fa-envelope,
+.fa-eye-slash {
+    position: absolute;
+    font-size: 16pt;
+}
+
+.signin .fa-user, 
+.signup .fa-user {
+    left: 9px;
+    top: 10px;
+}
+
+.signin .fa-eye,
+.signin .fa-eye-slash {
+    right: 13px;
+    top: 60px;
+    cursor: pointer;
+}
+
+.signin .fa-key {
+    left: 9px;
+    top: 60px;
+}
+
+.signup .fa-envelope {
+    left: 9px;
+    top: 60px;
+}
+
+.signup .fa-key {
+    left: 9px;
+    top: 110px;
+}
+
+.signup .fa-eye,
+.signup .fa-eye-slash {
+    right: 13px;
+    top: 110px;
+    cursor: pointer;
+}
+
+
+.signup .fa-redo {
+    left: 9px;
+    font-size: 14pt;
+    top: 160px;
+}
+
+
+.btn__login {
+    width: 150px;
+    height: 40px;
+    border: none;
+    font-size: 16pt;
+    margin: 0 50px;
+    color: #fff;
+    margin-bottom: 10px;
+    background: #3b3b3b;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.signin .btn__login:hover,
+.signin .btn__login:active,
+.signin .btn__login:focus {
+    background: rgba(54, 134, 255, 0.699);
+    transition: 0.3s;
+}
+
+.signup .btn__login:hover,
+.signup .btn__login:active,
+.signup .btn__login:focus {
+    background: rgba(54, 255, 71, 0.699);
+    transition: 0.3s;
+}
+
+/*END ICONS*/
+
+.message {
+    color: rgba(255, 255, 255, 0.493);
+}
+
+.message a {
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.message a:hover {
+    color: #b4b4b4;
+    transition: 0.3s;
+}
