@@ -53,6 +53,18 @@ body {
     padding-right: 30px;
 }
 
+.signin input:focus,
+.signup input:focus {
+    border: 2px solid #b4b4b4;
+    background: rgba(255, 255, 255, 0.226);
+}
+
+.signin input:hover,
+.signup input:hover {
+    background: rgba(255, 255, 255, 0.226);
+    transition: background 0.5s;
+}
+
 .signin, .signup {
     position: relative;
 }
@@ -69,11 +81,20 @@ body {
     font-size: 16pt;
 }
 
-.signin .fa-user, 
-.signup .fa-user {
+.signin .fa-user {
     left: 9px;
     top: 10px;
 }
+
+.signup div {
+    position: absolute;
+}
+
+.signup .fa-user {
+    left: 9px;
+    top: 110px;
+}
+
 
 .signin .fa-eye,
 .signin .fa-eye-slash {
@@ -89,18 +110,18 @@ body {
 
 .signup .fa-envelope {
     left: 9px;
-    top: 60px;
+    top: 160px;
 }
 
 .signup .fa-key {
     left: 9px;
-    top: 110px;
+    top: 210px;
 }
 
 .signup .fa-eye,
 .signup .fa-eye-slash {
     right: 13px;
-    top: 110px;
+    top: 210px;
     cursor: pointer;
 }
 
@@ -108,7 +129,7 @@ body {
 .signup .fa-redo {
     left: 9px;
     font-size: 14pt;
-    top: 160px;
+    top: 260px;
 }
 
 

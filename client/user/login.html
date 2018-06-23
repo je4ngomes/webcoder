@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="../css/login.css"/>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
-    <title>webcoder login</title>
+    <title>WebCoder login</title>
 </head>
 <body background="../img/login.jpg">
     <div class="login__page">
         <div class="forms">
-            <form class="signin" action="/user/login" method="post">
+            <form class="signin disabled" action="/user/login" method="post">
                 <i class="fas fa-user"></i>
                 <input type="text" name="username" placeholder="Username"/>
                 <i class="fas fa-key"></i>
@@ -22,12 +22,16 @@
                 <p class="message">Not registered? <a id="register">Create an account</a></p>
             </form>
 
-            <form class="signup disabled" action="/user/register" method="post">
+            <form class="signup" action="/user/register" method="post">
+                <input type="text" name="first_name" placeholder="First Name"/>
+                
+                <input type="text" name="last_name" placeholder="Last Name"/>
+
                 <i class="fas fa-user"></i>
                 <input type="text" name="username" placeholder="Username"/>
 
                 <i class="fas fa-envelope"></i>
-                <input type="email" name="email" placeholder="Email"/>
+                <input type="email" name="email" placeholder="Email" autocomplete="off"/>
 
                 <i class="fas fa-key"></i>
                 <i class="fas fa-eye"></i>
