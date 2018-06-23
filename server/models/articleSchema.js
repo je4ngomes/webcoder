@@ -13,6 +13,7 @@ const articleSchema = Schema({
         trim: true,
         required: true
     },
+    status: { type: String, default: 'pending' },
     createdAt: {type: Number, required: true},
     createdBy: {type: String, required: true},
     comments: [{
