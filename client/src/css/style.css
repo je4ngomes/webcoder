@@ -20,27 +20,64 @@ body {
 
 .header h1 {
     font-size: 40pt;
-    background: #000000;
     width: 1px;
     position: relative;
     left: 3rem;
     top: 30%;
 }
 
-.tutorials__posts {
+.dropdown {
     background-color: rgb(31, 31, 31);
     position: absolute;
-    top: 3.2rem;
-    left: 5px;
-    width: 73%;
+    top: 3.3rem;
+    left: -5rem;
+    width: 1345px;
+    border-top: 2px solid rgba(110, 110, 110, 0.671);
     box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.438);
     height: 200px;
-    z-index: 1;
+    visibility: hidden;
+    z-index: 10;
 }
 
-.disabled {
-    display: none;
-    transition: 1s;
+.tech:hover .dropdown {
+    border-top: 2px solid rgba(255, 255, 255, 0.671);
+    transition: border 0.3s;
+    visibility: visible;
+}
+
+.list__container {
+    position: relative;
+    top: 5rem;
+}
+
+.tech__title {
+    position: absolute !important;
+    top: 10px !important;
+    left: 20px !important;
+    font-size: 23pt !important;
+    color: rgb(255, 255, 255);
+}
+
+.tech__item {
+    float: left;
+    line-height: 0px !important;
+    margin-bottom: 40px;
+}
+
+.tech__item a {
+    padding: 10px 20px !important;
+    color: #fff;
+    font-weight: bolder;
+    text-decoration: none;
+    background: #3333339a;
+    transition: background 0.5s;
+
+}
+
+.tech__item a:hover {
+    color: #000000;
+    background: #ffffff;
+    transition: 0.5s;
 }
 
 .navbar ul li {
@@ -49,6 +86,7 @@ body {
     position: relative;
     line-height: 50px;
     left: 10px;
+    cursor: pointer;
     margin-right: 5px;
 }
 
@@ -77,12 +115,16 @@ form {
     font-size: 17px;
     background-color: #383838;
     border: 1px solid #202020;
-    width: 16%;
+    width: 16%; height: 25px;
     border-radius: 5px;
     display: block;
     color: #fff;
     padding: 5px 30px 5px 10px;
-    height: 25px;
+    transition: background-color 0.3s;
+}
+
+.navbar input:hover, .navbar input:focus {
+    background-color: rgba(255, 255, 255, 0.226);
 }
 
 .search button {
@@ -95,11 +137,12 @@ form {
     right: 2.5rem;
     cursor: pointer;
     line-height: 50px;
+    transition: color 0.4s;
 }
 
 .search button:hover {
     color: #000000;
-    transition: 0.4s;
+    transition: color 0.4s;
 }
 
 
@@ -395,4 +438,26 @@ footer .logo :nth-child(2) {
 .row,
 .group {
 	zoom: 1;
+}
+
+.link{
+  position: relative;
+}
+
+.link:after{
+  content: '';
+  position: absolute;
+  width: 0; height: 3px;
+  display: block;
+  margin-top: -10px;
+  right: 0;
+  background: #fff;
+  transition: width .2s ease;
+  -webkit-transition: width .2s ease;
+}
+ 
+.link:hover:after{
+  width: 100%;
+  left: 0;
+  background: #fff;
 }

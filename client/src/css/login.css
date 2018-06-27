@@ -12,9 +12,8 @@ body {
 
 .login__page {
     width: 360px;
-    background: #252525;
+    background: #2525259a;
     margin: 10rem auto 0;
-    border: 3px solid #1a1a1a;
 }
 
 .forms {
@@ -32,7 +31,6 @@ body {
     display: none;
     transition: 1s;
 }
-
 
 .signin input, .signup input {
     width: 250px;
@@ -62,7 +60,7 @@ body {
 .signin input:hover,
 .signup input:hover {
     background: rgba(255, 255, 255, 0.226);
-    transition: background 0.5s;
+    transition: background 0.3s;
 }
 
 .signin, .signup {
@@ -79,6 +77,7 @@ body {
 .fa-eye-slash {
     position: absolute;
     font-size: 16pt;
+    color: #eee;
 }
 
 .signin .fa-user {
@@ -98,7 +97,7 @@ body {
 
 .signin .fa-eye,
 .signin .fa-eye-slash {
-    right: 13px;
+    right: 15px;
     top: 60px;
     cursor: pointer;
 }
@@ -120,7 +119,7 @@ body {
 
 .signup .fa-eye,
 .signup .fa-eye-slash {
-    right: 13px;
+    right: 15px;
     top: 210px;
     cursor: pointer;
 }
@@ -175,4 +174,12 @@ body {
 .message a:hover {
     color: #b4b4b4;
     transition: 0.3s;
+}
+
+.background {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }

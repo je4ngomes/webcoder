@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const path = require('path');
 
-const {main, user} = require('./routes');
+const { main, user } = require('./routes');
 
 const app = express();
 
@@ -12,7 +12,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 // load middlewares
-app.use(express.static(path.join(__dirname, '../client')));
+app.use('/src', express.static(path.join(__dirname, '../client/src')));
+app.use('/scripts', express.static(path.join(__dirname, '../client/node_modules')));
+
 app.use([
     bodyParser.json(), 
     bodyParser.urlencoded({ extended: false })
