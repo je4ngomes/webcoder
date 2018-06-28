@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/src/css/dashboard.css">
+    <link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap-grid.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>    
     <title>Dashboard</title>
 </head>
@@ -14,7 +15,7 @@
     </nav>
 
     <div class="sidebar">
-        <div class="btn"><i class="fas fa-align-left"></i></div>
+        <div class="button"><i class="fas fa-align-left"></i></div>
         <div class="logo"><img src="https://avatars0.githubusercontent.com/u/38874366?s=460&v=4" alt=""></div>
         <h1 class="user">Cyrax</h1>
     
@@ -29,27 +30,31 @@
 
     <div class="content">
         <div class="main__title">
-            <h1>Dashboard</h1>
+            <h1 id="title">Dashboard</h1>
         </div>
 
         <main>
-            <div class="posts__counter">
-                <h1>Posts</h1> 
-                <span>0</span>
+            <div class="row">
+                <div class="col-12 col-sm-5 col-md-3 offset-md-3 offset-sm-1 posts__counter">
+                    <h1>Posts</h1> 
+                    <span>0</span>
+                </div>
+
+                <div class="col-12 col-sm-5 col-md-3 pending__counter">
+                    <h1>Pending Posts</h1>
+                    <span>0</span>
+                </div>
             </div>
 
-            <div class="pending__counter">
-                <h1>Pending Posts</h1>
-                <span>0</span>
-            </div>
-
-            <div class="latest__post">
-                <h1>Latest Post</h1>
-                <div class="card">
-                    <div class="card__img"></div>
-                    <div class="card__content">
-                        <h1 class="card__title"></h1>
-                        <p class="card__description"></p>
+            <div class="row">
+                <div class="col latest__post">
+                    <h1>Latest Post</h1>
+                    <div class="card">
+                        <div class="card__img"></div>
+                        <div class="card__content">
+                            <h1 class="card__title"></h1>
+                            <p class="card__description"></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,7 +62,7 @@
     </div>
 
     <script>
-        document.querySelector('.btn')
+        document.querySelector('.button')
             .addEventListener('click', () => {
                 document.querySelector('.sidebar')
                     .classList.toggle('visible');
