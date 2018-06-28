@@ -10,8 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^4.1.1",
-    "font-mfizz": "^2.4.1",
-    "hover.css": "^2.3.2",
-    "particlesjs": "^2.2.2"
+    "font-mfizz": "^2.4.1"
   }
 }
