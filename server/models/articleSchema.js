@@ -8,14 +8,15 @@ const articleSchema = Schema({
         max: 60,
         required: true
     },
-    content: {
+    body: {
         type: String,
         trim: true,
         required: true
     },
-    status: { type: String, default: 'pending' },
+    status: { type: String, required: true, default: 'public' },
     createdAt: {type: Number, required: true},
     createdBy: {type: String, required: true},
+    AllowComments: {type: Boolean, required: false},
     comments: [{
         comment: {type: Number, required: true, trim: true},
         createdAt: {type: Number, required: true},

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/src/css/login.css"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <title>WebCoder login</title>
+</head>
+<body>
+    <div class="login__page">
+        <div class="forms">
+            <form class="signin disabled">
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Username"/>
+                <i class="fas fa-key"></i>
+                <i class="fas fa-eye"></i>
+                <input type="password" name="password" placeholder="Password"/>
+                <button class="btn__login">Login</button>
+                <p class="message">Not registered? <a id="register">Create an account</a></p>
+            </form>
+
+            <form class="signup">
+                <input type="text" name="first_name" placeholder="First Name" data-value-missing="Required"/>
+                
+                <input type="text" name="last_name" placeholder="Last Name" data-value-missing="Required"/>
+
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Username"/>
+
+                <i class="fas fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email" autocomplete="off"/>
+
+                <i class="fas fa-key"></i>
+                <i class="fas fa-eye"></i>
+                <input type="password" name="password" placeholder="Password"/>
+
+                <input type="password" name="passwordConf" placeholder="Repeat password"/>
+                <i class="fas fa-redo"></i>
+                <button class="btn__login">Register</button>
+                <p class="message">Already registered? <a id="login">Sign In</a></p>            
+            </form>
+        </div>
+        <div class="arrow__box">
+            <ul class="requirements">
+                <li class="alphanum">Must be alphanum.</li>
+                <li class="length">At least 8 characters.</li>
+                <li class="symbol">At least 1 symbol($%!.@#...).</li>
+                <li class="lowercase">At least 1 lowercase letter.</li>
+                <li class="uppercase">At least 1 uppercase letter.</li>
+            </ul>
+        </div>
+    </div>
+
+    
+    <script src="/src/js/auth/login.js" type="module"></script>
+</body>
+</html>

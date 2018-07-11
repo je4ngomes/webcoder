@@ -1,0 +1,44 @@
+<div class="content">
+    <div class="row">
+        <main class="main col col-md-9">
+            <div class="main__title">
+                <h1 class="">Recent Posts</h1>
+            </div>
+            {{#if recentPosts}}
+                <div class="row">
+                    {{#each articles_first_row}}
+                        <div class="col col-sm-4">
+                            <article class="articles">
+                                <div class="img-scale">
+                                    <img src="{{this.urlImg}}" alt="">
+                                </div>
+                                <h1>{{this.title}}</h1>
+                                <p>{{this.paragraph}}</p>
+                                <button class="btn">Read More</button>
+                            </article>
+                        </div>
+                    {{/each}}
+                </div>
+                
+                <div class="row">
+                    {{#each articles_second_row}}
+                        <div class="col col-sm-4">
+                            <article class="articles">
+                                <div class="img-scale">
+                                    <img src="{{this.urlImg}}" alt="">
+                                </div>
+                                <h1>{{this.title}}</h1>
+                                <p>{{this.paragraph}}</p>
+                                <button class="btn">Read More</button>
+                            </article>
+                        </div>
+                    {{/each}}
+                </div>
+            {{else}}
+                <h1 class="noposts">No posts to show</h1>
+            {{/if}}
+        </main>
+
+        {{> home/home-aside}}
+    </div>
+</div>

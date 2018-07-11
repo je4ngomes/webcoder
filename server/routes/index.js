@@ -1,7 +1,7 @@
-const main = require('./main');
-const user = require('./user');
+const mainRoute = require('./main');
+const userRoute = require('./user/user');
 
 module.exports = {
-    main,
-    user
+    mainRoute,
+    userRoute
 };

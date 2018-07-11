@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/src/css/dashboard.css">
+    <link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="/src/css/posts.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>    
+    <title>Dashboard</title>
+</head>
+<body>
+    <nav class="navbar__top">
+        <div class="logout"><a href="/logout">Log out</a></div>
+    </nav>
+
+    {{> user/user-sidenav}}
+
+    {{{body}}}
+
+    <footer class="footer">
+        <span class="copy__text">Copyright</span> 
+        <span class="copy__symbol">&copy;</span> 
+        <span class="website__title">webcoder 2018</span>
+    </footer>
+
+    <script>
+        document.querySelector('.button')
+            .addEventListener('click', () => {
+                document.querySelector('.sidebar')
+                    .classList.toggle('visible');
+        });
+    
+    </script>
+    <script src="/src/js/script.js"></script>
+
+</body>
+</html>
+
+

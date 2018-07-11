@@ -1,0 +1,30 @@
+<div class="content">
+    <div class="main__title">
+        <h1 id="title">Create Post</h1>
+    </div>
+
+    <main>
+        <form class="post__form" action="/user/posts/post" method="POST">
+            <div class="top__inputs">
+                <input type="checkbox" name="allowComments" id="allowComments"/>
+                <label for="allowComments">allow Comments</label>
+
+                <select name="status" id="" class="form__status">
+                    <option selected disabled>Status</option>
+                    <option value="public">Public</option>
+                    <option value="private">Private</option>
+                    <option value="draft">Draft</option>
+                <i class="fas fa-caret-down"></i>
+                </select>
+                <button type="submit">Publish</button>
+            </div>
+            
+            <div class="main__inputs">
+                <input type="text" class="form__title" name="postTitle" placeholder="Title" autocomplete="off" autofocus/>
+
+                <textarea class="post_body" name="postBody" id="" placeholder="Tell your story..."></textarea>
+            </div>
+            
+        </form>
+    </main>
+</div>
