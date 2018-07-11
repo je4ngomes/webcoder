@@ -15,5 +15,3 @@ export const validate = {
         return (acc, curr) => ({...acc, [curr]: this.patterns[curr].test(pw)})
     }
 };
-
-// password does not meet complexity requirements
