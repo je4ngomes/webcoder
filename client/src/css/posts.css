@@ -1,0 +1,172 @@
+.post__form {
+    width: 100%;
+    position: relative;
+}
+
+
+
+.top__inputs {
+    position: absolute;
+    right: 0;
+}
+
+.top__inputs label[for=allowComments] {
+    background: #ff4e4e;
+    padding: 11px 12px;
+    font-weight: bold;
+    font-size: 12pt;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    top: -1.5px;
+}
+
+.top__inputs input[type=checkbox] {
+    display: none;
+}
+
+.top__inputs input:checked + label {
+    background: #67ff73;
+    color: #3f3f3f;
+}
+
+.top__inputs button {
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 10px;
+    border: none;
+    width: 100px; height: 40px;    
+    background: #3f3f3f;
+    transition: 0.5s;
+}
+
+.top__inputs button:hover, 
+.top__inputs select:hover {
+    color: #252525;
+    background: #eeeeee;
+    transition: 0.5s;
+}
+
+.top__inputs select {
+    width: 100px; height: 40px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-weight: bold;
+    background: #3f3f3f;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+
+
+.top__inputs select {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+.top__inputs label {
+    font-size: 14pt;
+    color: white;
+}
+
+.main__inputs {
+    position: absolute;
+    width: 100%;
+    top: 50px;
+}
+
+.main__inputs input {
+    display: block;
+    margin: 0 auto;
+    color: white;
+    margin-bottom: 5px;
+    font-size: 20pt;
+    font-weight: bolder;
+    background: #313131;
+    border: none;
+    width: 80%; height: 40px;
+    padding-left: 10px;
+}
+
+.main__inputs textarea {
+    display: block;
+    margin: 0 auto;
+    color: white;
+    margin-bottom: 10px;
+    background: #313131;   
+    border: none;
+    resize: none;
+    font-size: 16pt;
+    padding-left: 10px;
+    width: 80%; height: 370px;
+}
+
+
+.pagination {
+    width: 30%;
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 0;
+    list-style-type: none;
+}
+
+.pagination li {
+    display: inline-block;
+    font-size: 12pt;
+    color: white;
+}
+
+.pagination .current,
+.pagination .limit {
+    padding: 8px 15px;
+    background: #3f3f3f;
+}
+
+.pagination .btn__prev, 
+.pagination .btn__next {
+    background: #3f3f3f;
+    transition: 0.5s;
+}
+
+.pagination .btn__prev:hover, 
+.pagination .btn__next:hover {
+    color: #252525;
+    background: #eeeeee;
+    transition: 0.5s;
+}
+
+.pagination .btn__prev:hover a, 
+.pagination .btn__next:hover a {
+    color: #252525;
+    transition: 0.5s;
+}
+
+
+.pagination li a {
+    text-decoration: none;
+    padding: 8px 15px;
+    display: inline-block;
+    color: white;
+    transition: 0.5s;
+}
+
+.pagination li:not(.btn__next) {
+    border-right: 1px solid #ffffff73;
+}
+
+.disabled {
+    background: rgba(209, 209, 209, 0.836) !important;
+    border-right: none !important;
+    transition: none !important;
+    cursor: default !important;
+}
+
+.disabled a {
+    color: black !important;
+    transition: none !important;
+    cursor: default !important;
+}

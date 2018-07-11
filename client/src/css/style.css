@@ -115,7 +115,7 @@ form {
     font-size: 17px;
     background-color: #383838;
     border: 1px solid #202020;
-    width: 16%; height: 25px;
+    width: 16%; height: 35px;
     border-radius: 5px;
     display: block;
     color: #fff;
@@ -190,7 +190,7 @@ main {
 
 
 
-.container {
+.content {
     max-width: 95%;
     margin: 0 auto;
 }
@@ -300,6 +300,21 @@ aside nav li i {
 aside nav li:hover a {
     color: #999999;
 }
+
+.group:before,
+.group:after {
+	content: "";
+	display: table;
+}
+
+.group:after {
+	clear: both;
+}
+
+.group {
+	zoom: 1;
+}
+
 
 
 

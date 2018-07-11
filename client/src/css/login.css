@@ -4,6 +4,7 @@
 }
 
 body {
+    background-image: url("/src/img/login.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -182,4 +183,39 @@ body {
   top: 0;
   left: 0;
   z-index: -1;
+}
+
+.arrow__box {
+	position: absolute;
+	background: #3b3b3b;
+    border-radius: 3px;
+    right: 22%;
+    opacity: 0;
+    transition: opacity 0.3s;
+    top: 56%;
+}
+
+.arrow__box:after {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-right-color: rgba(255, 222, 222, 0);
+	border-right-color: #1a1a1a;
+	border-width: 10px;
+	margin-top: -10px;
+}
+
+.requirements {
+    position: relative;
+    padding: 20px;
+}
+
+.requirements li {
+    font-size: 10pt;
+    color: #ff6a6a;
 }
