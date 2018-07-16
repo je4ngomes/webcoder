@@ -1,9 +1,9 @@
 <header class="header">
     <h1>WebCoder</h1>
     {{#if isLogged}}
-        <div class="signin"><a href="/logout">{{username}}</a></div>
+        <div class="signin"><a href="{{dashboardLink}}">Dashboard</a></div>
     {{else}}
-        <div class="signin"><a href="/login">Sign in</a></div>
+        <div class="signin"><a href="/auth">Sign in</a></div>
     {{/if}}
     
     <nav class="navbar">

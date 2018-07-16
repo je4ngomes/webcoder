@@ -6,11 +6,12 @@ const loginSchema = Joi.object({
 });
 
 const registerSchema = Joi.object({
-    firstname: Joi.string().empty().trim().required(),
-    lastname: Joi.string().empty().trim().required(),
+    first_name: Joi.string().empty().trim().required(),
+    last_name: Joi.string().empty().trim().required(),
     username: Joi.string().trim().alphanum().required(),
     email: Joi.string().email().required(),
-    password: Joi.string().regex(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")).required()
+    password: Joi.string().regex(new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})')).required(),
+    passwordConf: Joi.any().valid(Joi.ref('password')).required()
 });
 
 module.exports = {

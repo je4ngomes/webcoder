@@ -1,4 +1,5 @@
 const moongose = require('mongoose');
+const bcrypt = require('bcrypt');
 const Schema = moongose.Schema;
 
 const userSchema = Schema({
@@ -14,7 +15,6 @@ const userSchema = Schema({
     password: {
         type: String,
         min: 8,
-        max: 50,
         required: true
     },
     email: {
@@ -28,10 +28,48 @@ const userSchema = Schema({
             message: '{VALUE} is not a valid email!'
         }
     },
+    confirmed: {
+        type: Boolean,
+        default: false
+    },
     isAdmin: {
         type: Boolean,
         default: false
     }
+});
+
+userSchema.statics.findByCredentials = function(username, password) {
+    const User = this;
+
+    return User.findOne({ username })
+        .then(user => {
+            if (!user) return Promise.reject();
+
+            return new Promise((resolve, reject) => {
+                bcrypt.compare(password, user.password)
+                    .then(result => {
+                        if (result)
+                            return resolve(result);
+                        reject();
+                    });
+            });
+        });    
+};
+
+userSchema.pre('save', function(next) {
+    const user = this;
+
+    if (user.isModified('password')) {
+        return bcrypt.genSalt(10)
+            .then(salt => 
+                bcrypt.hash(user.password, salt)
+                    .then(hash => {
+                        user.password = hash;
+                        next();
+                    })
+            );
+    }
+    next();
 });
 
 module.exports = userSchema;

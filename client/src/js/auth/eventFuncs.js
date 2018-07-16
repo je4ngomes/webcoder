@@ -5,21 +5,24 @@ import {
     getElement,
     formatObj,
     isEmpty,
+    getQueryFrom,
+    isValidRedirection,
     getElements
 } from '../utils/utils.js';
 
-const changeColor = ([part, ...remaining], domObjs) => {
+
+const changeColor = ([part, ...remaining], domObj) => {
     const [key, value] = part;
 
     value 
-        ? domObjs[key].style.color = '#52ff61' 
-        : domObjs[key].style.color = '#ff6a6a';
+        ? domObj[key].style.color = '#52ff61' 
+        : domObj[key].style.color = '#ff6a6a';
 
     if (isEmpty(remaining)) {
-        return true;
+        return { done: true };
     }
 
-    return changeColor(remaining, domObjs);
+    return changeColor(remaining, domObj);
 };
 
 const validPassword = () => {
@@ -29,7 +32,7 @@ const validPassword = () => {
 
     const 
         requirements = getElements(selectors.requirements),
-        regfields = requirements.reduce(formatObj(), {});
+        regfields = requirements.reduce(formatObj({ inputValue: false }), {});
   
     changeColor(Object.entries(results), regfields);
 };
@@ -40,24 +43,76 @@ const changeOpacity = (opacity) => {
 }
 
 const submitRegister = (e) => {
-    const body = getElements(selectors.signupInput)
-        .reduce(formatObj(true), {});
-    console.log(registerForm.checkValidity());
-    //postData('/register', pipe([getReg]))
-
     e.preventDefault();
+
+    const body = getElements(selectors.signupInput)
+        .reduce(
+            formatObj({ inputValue: true }
+        ), {});
+
+    const {
+        password, passwordConf,
+        username, email
+    } = body
+
+    const jsonresults = [
+        postData('/auth/check/username', {username}),
+        postData('/auth/check/email', {email})
+    ].map(result => result.then(res => res.json()));
+    
+    Promise.all(jsonresults)
+        .then(results => {
+            // check if statusCode exist
+            // check if statusCode isn't 200
+            const errors = results
+                .filter(result => 
+                        result.statusCode ?
+                        result.statusCode !== 200 :
+                        false   
+                );
+
+            if (errors.length > 0) {
+                throw errors;
+            }
+        })
+        .then(_ => {
+            if (validate.password(password) && validate.match(password, passwordConf)) {
+                postData('auth/register', body)
+                    .then(res => {
+                        if (isValidRedirection(res)) {
+                            window.location.href = res.url;
+                        }
+                    })
+                    .catch(err => console.error(err));
+            }
+        })
+        .catch(err => 
+            console.error(err)
+        );
 };
 
 const submitLogin = (e) => {
-    const body = getElements(selectors.signinInput)
-        .reduce(formatObj(true), {});
-
-    postData('/login', body)
-        .then(res => res.json())
-        .then(result => console.log(result))
-        .catch(err => console.error(err));
-
     e.preventDefault();
+
+    const body = getElements(selectors.signinInput)
+        .reduce(
+            formatObj({ inputValue: true }
+        ), {});
+
+    const query = getQueryFrom(window.location.href); // ?query=
+    
+    postData(`auth/login${query}`, body)
+        .then(async res => {
+            if (res.bodyUsed)
+                throw await res.json();
+            return res;
+        })
+        .then(res => {
+            if (isValidRedirection(res)) {
+                window.location.href = res.url;
+            }
+        })
+        .catch(err => console.error(err));
 }
 
 const toggleElements = () => {

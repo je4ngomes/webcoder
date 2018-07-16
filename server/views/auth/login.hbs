@@ -11,45 +11,45 @@
 <body>
     <div class="login__page">
         <div class="forms">
-            <form class="signin disabled">
+            <form class="signin">
                 <i class="fas fa-user"></i>
-                <input type="text" name="username" placeholder="Username"/>
+                <input type="text" name="username" placeholder="Username" required/>
                 <i class="fas fa-key"></i>
                 <i class="fas fa-eye"></i>
-                <input type="password" name="password" placeholder="Password"/>
+                <input type="password" name="password" placeholder="Password" required/>
                 <button class="btn__login">Login</button>
                 <p class="message">Not registered? <a id="register">Create an account</a></p>
             </form>
 
-            <form class="signup">
-                <input type="text" name="first_name" placeholder="First Name" data-value-missing="Required"/>
+            <form class="signup disabled">
+                <input type="text" name="first_name" placeholder="First Name" required/>
                 
-                <input type="text" name="last_name" placeholder="Last Name" data-value-missing="Required"/>
+                <input type="text" name="last_name" placeholder="Last Name" required/>
 
                 <i class="fas fa-user"></i>
-                <input type="text" name="username" placeholder="Username"/>
+                <input type="text" name="username" placeholder="Username" required/>
 
                 <i class="fas fa-envelope"></i>
-                <input type="email" name="email" placeholder="Email" autocomplete="off"/>
+                <input type="email" name="email" placeholder="Email" autocomplete="on" required/>
 
                 <i class="fas fa-key"></i>
                 <i class="fas fa-eye"></i>
-                <input type="password" name="password" placeholder="Password"/>
+                <input type="password" name="password" placeholder="Password" required/>
+                <div class="arrow__box">
+                    <ul class="requirements">
+                        <li class="alphanum">Must be alphanum.</li>
+                        <li class="length">At least 8 characters.</li>
+                        <li class="symbol">At least 1 symbol($%!.@#...).</li>
+                        <li class="lowercase">At least 1 lowercase letter.</li>
+                        <li class="uppercase">At least 1 uppercase letter.</li>
+                    </ul>
+                </div>
 
-                <input type="password" name="passwordConf" placeholder="Repeat password"/>
+                <input type="password" name="passwordConf" placeholder="Repeat password" required/>
                 <i class="fas fa-redo"></i>
                 <button class="btn__login">Register</button>
                 <p class="message">Already registered? <a id="login">Sign In</a></p>            
             </form>
-        </div>
-        <div class="arrow__box">
-            <ul class="requirements">
-                <li class="alphanum">Must be alphanum.</li>
-                <li class="length">At least 8 characters.</li>
-                <li class="symbol">At least 1 symbol($%!.@#...).</li>
-                <li class="lowercase">At least 1 lowercase letter.</li>
-                <li class="uppercase">At least 1 uppercase letter.</li>
-            </ul>
         </div>
     </div>
 

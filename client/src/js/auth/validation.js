@@ -1,6 +1,6 @@
-import { getElements } from '../utils/utils.js';
+import { postData } from '../utils/utils.js';
 
-export const validate = {
+const validate = {
     patterns: {
         alphanum: /(?=.*[a-zA-Z0-9])/,
         lowercase: /(?=.*[a-z])/,
@@ -13,5 +13,15 @@ export const validate = {
     },
     _valid (pw) { 
         return (acc, curr) => ({...acc, [curr]: this.patterns[curr].test(pw)})
-    }
+    },
+    password(pw) {
+        const pattern = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})');
+        
+        return pattern.test(pw);
+    },
+    match: (x, y) => x === y
+};
+
+export {
+    validate
 };

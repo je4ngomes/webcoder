@@ -14,7 +14,7 @@ body {
 .login__page {
     width: 360px;
     background: #2525259a;
-    margin: 10rem auto 0;
+    margin: 6rem auto 0;
 }
 
 .forms {
@@ -186,14 +186,15 @@ body {
 }
 
 .arrow__box {
-	position: absolute;
+	position: relative;
 	background: #3b3b3b;
     border-radius: 3px;
-    right: 22%;
+    right: -13rem;
     opacity: 0;
     transition: opacity 0.3s;
-    top: 56%;
+    top: 43%;
 }
+
 
 .arrow__box:after {
 	right: 100%;
@@ -212,10 +213,35 @@ body {
 
 .requirements {
     position: relative;
-    padding: 20px;
+    padding: 20px 10px 20px 20px;
 }
 
 .requirements li {
     font-size: 10pt;
-    color: #ff6a6a;
+    color: #ff5252;
+}
+
+
+.confirm__email {
+    background: #3b3b3b;
+    border-radius: 10px;
+    width: 50%;
+    margin: 10rem auto;
+}
+
+.confirm__email p {
+    color: white;
+    text-align: center;
+    text-justify: inter-word;
+    font-size: 16pt;
+    padding: 20px;
+}
+
+.confirm__email a {
+    text-decoration: none;
+    color: rgb(89, 255, 145);
+}
+
+.confirm__email a:hover {
+    color: rgb(54, 250, 120);
 }
