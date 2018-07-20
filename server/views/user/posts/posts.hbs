@@ -4,15 +4,32 @@
     </div>
 
     <main>
-        <article class="post">
-            
-        </article>
+        <table class="posts">
+            <thead>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Allow Comments</th>
+            </thead>
+            <tbody>
+                {{#each articles}}
+                    <tr>
+                        <td><a href="/posts/view/{{this.id}}">{{this.title}}</a></td>
+                        <td>{{this.status}}</td>
+                        <td>{{this.createdAt}}</td>
+                        <td>{{this.allowComments}}</td>
+                        <td><a href="/users/posts/edit/{{this.id}}"><i class="fas fa-edit"></i></a></td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
 
         <ul class="pagination">
-            <li class="btn__prev"><a href="/user/posts?page={{this.prev}}">prev</a></li>
-            <li class="current">{{this.current}}</li>
-            <li class="limit">{{this.limit}}</li>
-            <li class="btn__next"><a href="/user/posts?page={{this.next}}">next</a></li> 
+            
+            <li class="btn__prev"><a href="/users/posts?page={{pagination.prev}}">prev</a></li>
+            <li class="current">{{pagination.current}}</li>
+            <li class="limit">{{pagination.limit}}</li>
+            <li class="btn__next"><a href="/users/posts?page={{pagination.next}}">next</a></li> 
         </ul>
     </main>
 

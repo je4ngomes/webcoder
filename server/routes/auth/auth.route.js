@@ -2,11 +2,11 @@ const authRoute = require('express').Router();
 const jwt = require('jsonwebtoken');
 const validator = require('express-joi-validation')({ passError: true });
 
-const transporter = require('../../config/mailer.config');
-const passport = require('../../config/passport.config');
+const { transporter } = require('../../config');
 const { User } = require('../../models');
-const { loginSchema, registerSchema } = require('../../validations/user');
-const { checkExistence, genToken } = require('../../utils/utils');
+const { loginSchema, registerSchema } = require('../../validators/user.valid');
+const { checkExistence, genToken } = require('../../utils');
+const auth = require('../../middlewares/auth');
 
 authRoute.all('*', (req, res, next) => {
     req.app.locals.layout = '';
@@ -17,47 +17,11 @@ authRoute.get('/', (req, res) => {
     res.render('auth/login');
 });
 
-const isAccountConfirmed = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return User.findById(req.user.id)
-            .then(user => {
-                if (user.confirmed) {
-                    return res.redirect('/');
-                }
-                next();
-        });
-    }
-    res.redirect(`/auth`);
-};
 
 authRoute.post(
     '/login',
     validator.body(loginSchema),
-    (req, res, next) => {
-        const redirectTo = req.query.redirectTo;
-
-        passport.authenticate('local', (err, user, info) => {
-            if (err)
-                return res.boom.badRequest('Unable to authenticate. Please try again.');
-            if (info)
-                return res.boom.unauthorized(info);
-            
-            req.logIn({ 
-                firstname: user.name.first, 
-                lastname: user.name.last, 
-                username: user.username,
-                isAdmin: user.isAdmin,
-                id: user._id 
-            }, (err) => {
-                if (err) 
-                    return next(err);
-
-                if (user.isAdmin) 
-                    return res.redirect(redirectTo || '/admin/dashboard');
-                res.redirect(redirectTo || '/user/dashboard');
-            });
-        })(req, res, next);
-    }
+    auth.authenticate
 );
 
 authRoute.post('/register', validator.body(registerSchema), (req, res) => {
@@ -88,12 +52,16 @@ authRoute.post('/register', validator.body(registerSchema), (req, res) => {
                 res.redirect('/auth/confirmation');
             });
         })
-        .catch(err => res.boom.badImplementation());
+        .catch(err => {
+            console.error(err);
+            res.boom.badImplementation();
+        });
 
 });
 
-authRoute.get('/confirmation', isAccountConfirmed, (req, res) => {
+authRoute.get('/confirmation', auth.isAccountConfirmed, (req, res) => {
     
+    res.render('auth/confirmation');
     User.findById(req.user.id)
         .then(user => {
             transporter.sendMail({
@@ -103,17 +71,17 @@ authRoute.get('/confirmation', isAccountConfirmed, (req, res) => {
                 html: `<p>Hello ${user.name.first}, 
                 please click in the link bellow to confirmated 
                 your email address: 
-                <a href="http://localhost:3000/auth/confirmation/${genToken(user._id, process.env.MAIL_SECRET)}">link</a></p>`
+                <a href="http://localhost:3000/auth/confirmation/${genToken(user._id, process.env.MAIL_SECRET)}">
+                link</a></p>`
             })
             .then(info => {
                 console.log('Message sent: %s', info.messageId);
-                res.render('auth/confirmation');
             })
             .catch(err => console.error(err));            
         });
 });
 
-authRoute.get('/confirmation/:token', isAccountConfirmed, (req, res) => {
+authRoute.get('/confirmation/:token', auth.isAccountConfirmed, (req, res) => {
     const TOKEN = req.params.token;
     const { data: userId } = jwt.verify(TOKEN, process.env.MAIL_SECRET);
 
@@ -122,7 +90,10 @@ authRoute.get('/confirmation/:token', isAccountConfirmed, (req, res) => {
             return res.boom.notFound('User not found.');
         res.redirect('/');
     })
-    .catch(err => res.boom.badImplementation());
+    .catch(err => {
+        console.error(err);
+        res.boom.badImplementation();
+    });
 });
 
 
@@ -136,7 +107,10 @@ authRoute.post('/check/username', (req, res) => {
 
             res.status(200).send({});
         })
-        .catch(err => res.boom.badImplementation());
+        .catch(err => {
+            console.error(err);
+            res.boom.badImplementation();
+        });
 });
 
 authRoute.post('/check/email', (req, res) => {
@@ -151,7 +125,10 @@ authRoute.post('/check/email', (req, res) => {
             
             res.status(200).send({});
         })
-        .catch(err => res.boom.badImplementation());
+        .catch(err => {
+            console.error(err);
+            res.boom.badImplementation();
+        });
 });
 
 authRoute.use((err, req, res, next) => {

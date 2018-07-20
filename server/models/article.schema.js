@@ -8,25 +8,20 @@ const articleSchema = Schema({
         max: 60,
         required: true
     },
+    _id: String,
     body: {
         type: String,
-        trim: true,
         required: true
     },
     status: { type: String, required: true, default: 'public' },
     createdAt: {type: Number, required: true},
-    createdBy: {type: String, required: true},
-    AllowComments: {type: Boolean, required: false},
+    createdBy: {type: Schema.Types.ObjectId, required: true},
+    allowComments: {type: Boolean, required: false},
     comments: [{
-        comment: {type: Number, required: true, trim: true},
+        comment: {type: String, required: true},
         createdAt: {type: Number, required: true},
-        createdBy: {type: String, required: true}
-    }],
-    images: [{
-        contentType: String,
-        filename: String,
-        data: Buffer
+        createdBy: {type: Schema.Types.ObjectId, required: true}
     }]
-});
+}, {_id: false});
 
 module.exports = articleSchema;

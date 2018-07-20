@@ -105,8 +105,52 @@
 }
 
 
+.posts {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.posts td, .posts th {
+    border: 1px solid rgba(10, 10, 10, 0.555);
+    color: white;
+    font-size: 13pt;
+    font-weight: normal;
+    padding: 10px;
+}
+
+.posts td a {
+    text-decoration: none;
+    color: white;
+}
+
+.posts td a:hover {
+    text-decoration: underline;
+}
+
+.posts tr:nth-child(even){
+    background-color: #23b9f5;
+}
+
+.posts tr {
+    transition: .3s;
+}
+
+.posts tr:hover {
+    background-color: rgba(99, 99, 99, 0.336);
+    transition: .3s;
+}
+
+.posts th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(73, 145, 240);
+}
+
 .pagination {
-    width: 30%;
+    width: 13rem;
     position: relative;
     text-align: center;
     margin: 0 auto;

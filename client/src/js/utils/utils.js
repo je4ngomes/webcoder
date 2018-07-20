@@ -18,7 +18,7 @@ const formatObj =
     ({ inputValue }) => 
         (acc, curr) => ({
             ...acc, 
-            [curr.className || curr.name]: inputValue ? curr.value : curr
+            [curr.name || curr.className]: inputValue ? curr.value : curr
         });
 
 const isEmpty = (target) => target.length === 0;

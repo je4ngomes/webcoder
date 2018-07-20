@@ -1,28 +1,17 @@
 const userRoute = require('express').Router();
 const path = require('path');
 
-const postsRoute = require('./posts');
+const postsRoute = require('./posts.route');
 const { User } = require('../../models');
+const auth = require('../../middlewares/auth');
 
 userRoute.all('/*', (req, res, next) => {
     req.app.locals.layout = 'dashboard';
     next();
 });
 
-const isAuthenticated = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return User.findById(req.user.id)
-            .then(user => {
-                if (!user.confirmed) {
-                    return res.redirect('/auth/confirmation');
-                }
-                next();
-        });
-    }
-    res.redirect(`/auth?redirectTo=${req.originalUrl}`);
-};
 
-userRoute.use(isAuthenticated);
+userRoute.use(auth.isAuthenticated);
 
 //child routers
 userRoute.use('/posts', postsRoute);

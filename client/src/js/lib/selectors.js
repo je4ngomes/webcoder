@@ -1,4 +1,4 @@
-export default  {
+export const login = {
     registerAndLoginId: '#register, #login',
     signin: '.signin',
     signup: '.signup',
@@ -12,4 +12,10 @@ export default  {
     inputPassword: 'input[name=password]',
     inputPasswordConf: 'input[name=passwordConf]',
     requirements: '.requirements li'
+};
+
+export const posts = {
+    postForm: '.post__form',
+    allowComments: '.post__form input[type=checkbox]',
+    fields: '.post__form input, .post__form select, .post__form textarea'
 };

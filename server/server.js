@@ -7,10 +7,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
-require('./config/env').config(path.join(__dirname,'.env'));
-const { mainRoute, userRoute, authRoute } = require('./routes');
+require('./config/env').config(__dirname + '/.env');
+const { passport } = require('./config');
 const mongoose = require('./config/db/connection');
-const passport = require('./config/passport.config');
+const { mainRoute, userRoute, authRoute } = require('./routes');
 
 const app = express();
 const hbs = exphbs.create({
@@ -39,11 +39,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors());
 app.use(Boom());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // load routes
 app.use('/', mainRoute);
 app.use('/auth', authRoute);
-app.use('/user', userRoute);
+app.use('/users', userRoute);
 
 app.listen(
     process.env.PORT || 3000,

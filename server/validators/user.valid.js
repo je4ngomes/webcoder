@@ -1,13 +1,15 @@
 const Joi = require('joi');
 
+const name = Joi.string().empty().trim().required();
+
 const loginSchema = Joi.object({
     username: Joi.string().alphanum().required(),
     password: Joi.string().min(8).required()
 });
 
 const registerSchema = Joi.object({
-    first_name: Joi.string().empty().trim().required(),
-    last_name: Joi.string().empty().trim().required(),
+    first_name: name,
+    last_name: name,
     username: Joi.string().trim().alphanum().required(),
     email: Joi.string().email().required(),
     password: Joi.string().regex(new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})')).required(),

@@ -1,5 +1,5 @@
 import { validate } from './validation.js';
-import selectors from './selectors.js';
+import {login as selectors} from '../lib/selectors.js';
 import { 
     postData,
     getElement,

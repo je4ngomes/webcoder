@@ -4,12 +4,12 @@
     </div>
 
     <main>
-        <form class="post__form" action="/user/posts/post" method="POST">
+        <form class="post__form">
             <div class="top__inputs">
                 <input type="checkbox" name="allowComments" id="allowComments"/>
                 <label for="allowComments">allow Comments</label>
 
-                <select name="status" id="" class="form__status">
+                <select name="status" id="" class="form__status" required>
                     <option selected disabled>Status</option>
                     <option value="public">Public</option>
                     <option value="private">Private</option>
@@ -20,9 +20,9 @@
             </div>
             
             <div class="main__inputs">
-                <input type="text" class="form__title" name="postTitle" placeholder="Title" autocomplete="off" autofocus/>
+                <input type="text" class="form__title" name="postTitle" placeholder="Title" autocomplete="off" autofocus required/>
 
-                <textarea class="post_body" name="postBody" id="" placeholder="Tell your story..."></textarea>
+                <textarea class="post_body" name="postBody" id="" placeholder="Tell your story..." required></textarea>
             </div>
             
         </form>

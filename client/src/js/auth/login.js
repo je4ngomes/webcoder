@@ -6,7 +6,7 @@ import {
     submitRegister,
     toggleForm
 } from './eventFuncs.js';
-import selectors from './selectors.js';
+import {login as selectors} from '../lib/selectors.js';
 
 const loginForm = document.querySelector(selectors.signin);
 const registerForm = document.querySelector(selectors.signup);
