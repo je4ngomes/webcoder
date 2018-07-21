@@ -1,4 +1,4 @@
-.post__form {
+.post__form, .edit__form {
     width: 100%;
     position: relative;
 }
@@ -103,7 +103,20 @@
     padding-left: 10px;
     width: 80%; height: 370px;
 }
+.md {
+    position: absolute;
+}
 
+.md, .md a {
+    color: #fff460;
+    text-decoration: none;
+    font-size: 9pt;
+}
+
+.md a:hover {
+    color: #8cff75;
+    text-decoration: underline;
+}
 
 .posts {
     font-family: Arial, Helvetica, sans-serif;
@@ -130,7 +143,23 @@
 }
 
 .posts tr:nth-child(even){
-    background-color: #23b9f5;
+    background-color: #295d72;
+}
+
+.fa-edit:hover {
+    color: #67ff73;
+}
+
+.posts button {
+    cursor: pointer;
+    font-size: 13pt;
+    color: white;
+    background: none;
+    border: none;
+}
+
+.posts button:hover {
+    color: #ff4e4e;
 }
 
 .posts tr {
@@ -138,7 +167,7 @@
 }
 
 .posts tr:hover {
-    background-color: rgba(99, 99, 99, 0.336);
+    background-color: rgba(115, 113, 255, 0.178);
     transition: .3s;
 }
 
@@ -150,7 +179,7 @@
 }
 
 .pagination {
-    width: 13rem;
+    width: 15rem;
     position: relative;
     text-align: center;
     margin: 0 auto;

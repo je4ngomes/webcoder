@@ -19,19 +19,18 @@
                         <td>{{this.createdAt}}</td>
                         <td>{{this.allowComments}}</td>
                         <td><a href="/users/posts/edit/{{this.id}}"><i class="fas fa-edit"></i></a></td>
+                        <td><button class="btn__delete" value="/users/posts/del/{{this.id}}"><i class="fas fa-trash-alt"></i></td>
                     </tr>
                 {{/each}}
             </tbody>
         </table>
 
         <ul class="pagination">
-            
             <li class="btn__prev"><a href="/users/posts?page={{pagination.prev}}">prev</a></li>
             <li class="current">{{pagination.current}}</li>
             <li class="limit">{{pagination.limit}}</li>
             <li class="btn__next"><a href="/users/posts?page={{pagination.next}}">next</a></li> 
         </ul>
     </main>
-
-    
 </div>
+<script src="/src/js/dashboard/posts.js" type="module"></script>

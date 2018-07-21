@@ -1,0 +1,37 @@
+<div class="content">
+    <div class="main__title">
+        <h1 id="title">Edit Post</h1>
+    </div>
+
+    <main>
+        <p class="md"><i class="fas fa-exclamation-triangle"></i> Only 
+            <strong><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown</a></strong> syntax allowed.
+        </p> 
+            
+        <form class="edit__form">
+            <div class="top__inputs">
+                <input type="checkbox" {{#if isChecked}}checked{{/if}} name="allowComments" id="allowComments"/>
+                <label for="allowComments">allow Comments</label>
+
+                <select name="status" id="" class="form__status" required>
+                    <option selected disabled>Status</option>
+                    {{#selector selected}}
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                        <option value="draft">Draft</option>
+                    {{/selector}}
+                <i class="fas fa-caret-down"></i>
+                </select>
+                <button type="submit">Save</button>
+            </div>
+            
+            <div class="main__inputs">
+                <input type="text" class="form__title" name="postTitle" placeholder="# Title" autocomplete="off" value="{{title}}" autofocus required/>
+
+                <textarea class="post_body" name="postBody" id="" placeholder="Tell your story..." required>{{body}}</textarea>
+            </div>
+            
+        </form>
+    </main>
+</div>
+<script src="/src/js/dashboard/editpost.js" type="module"></script>

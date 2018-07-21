@@ -16,6 +16,15 @@ const app = express();
 const hbs = exphbs.create({
     extname: '.hbs',
     layoutsDir: path.join(__dirname, 'views/layouts'),
+    helpers: {
+        selector(selected, options) {
+            return options.fn(this)
+                .replace(
+                    `value="${selected}"`, 
+                    `value="${selected}" selected`
+                );
+        }
+    },
     defaultLayout: 'main',
     partialsDir: 'views/partials/'
 });
@@ -45,6 +54,15 @@ app.use(bodyParser.json());
 app.use('/', mainRoute);
 app.use('/auth', authRoute);
 app.use('/users', userRoute);
+
+app.use((err, req, res, next) => {
+    if (err.error.isJoi) {
+        res.status(400).redirect('/400');
+    } else {
+        next(err);
+    }
+});
+
 
 app.listen(
     process.env.PORT || 3000,

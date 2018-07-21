@@ -16,6 +16,7 @@ export const login = {
 
 export const posts = {
     postForm: '.post__form',
-    allowComments: '.post__form input[type=checkbox]',
-    fields: '.post__form input, .post__form select, .post__form textarea'
+    editForm: '.edit__form',
+    allowComments: 'form input[type=checkbox]',
+    fields: 'form input, form select, form textarea'
 };

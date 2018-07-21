@@ -1,8 +1,7 @@
 const userRoute = require('express').Router();
-const path = require('path');
 
 const postsRoute = require('./posts.route');
-const { User } = require('../../models');
+const {userCtrl} = require('../../controllers');
 const auth = require('../../middlewares/auth');
 
 userRoute.all('/*', (req, res, next) => {
@@ -10,27 +9,15 @@ userRoute.all('/*', (req, res, next) => {
     next();
 });
 
-
 userRoute.use(auth.isAuthenticated);
 
 //child routers
 userRoute.use('/posts', postsRoute);
 
-userRoute.get('/dashboard', (req, res) => {
-    res.render('user/dashboard', {
-        firstname: req.user.firstname,
-        lastname: req.user.lastname
-    });
-});
-
-userRoute.get('/profile', (req, res) => {
-
-});
-
-userRoute.get('/settings', (req, res) => {
-
-});
-
+userRoute
+    .get('/dashboard', userCtrl.renderDashboardPage)
+    .get('/profile', userCtrl.renderProfilePage)
+    .get('/settings', userCtrl.renderSettingsPage);
 
 
 module.exports = userRoute;

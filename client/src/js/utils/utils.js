@@ -9,6 +9,17 @@ const postData = (url, body) => {
     });
 };
 
+const updateData = (url, body) => {
+    return fetch(url, {
+        method: "PATCH",
+        mode: 'cors',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+}
+
 const isValidRedirection = (res) => res.status === 200 && res.redirected;
 
 const pipe = (funcs) => arg => funcs.reduce((prev, curr) => curr(prev), arg);
@@ -39,5 +50,6 @@ export {
     formatObj,
     isValidRedirection,
     pipe,
+    updateData,
     postData
 };
