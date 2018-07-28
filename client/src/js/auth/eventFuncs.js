@@ -77,7 +77,7 @@ const submitRegister = (e) => {
         })
         .then(_ => {
             if (validate.password(password) && validate.match(password, passwordConf)) {
-                postData('auth/register', body)
+                postData('auth/register', JSON.stringify(body), {'content-type': 'application/json'})
                     .then(res => {
                         if (isValidRedirection(res)) {
                             window.location.href = res.url;
@@ -100,8 +100,8 @@ const submitLogin = (e) => {
         ), {});
 
     const query = getQueryFrom(window.location.href); // ?query=
-    
-    postData(`auth/login${query}`, body)
+
+    postData(`auth/login${query}`, JSON.stringify(body), {'Content-type': 'application/json'})
         .then(async res => {
             if (res.bodyUsed)
                 throw await res.json();

@@ -2,6 +2,7 @@ const Joi = require('joi');
 
 const postSchema = Joi.object({
     postTitle: Joi.string().trim().empty().required(),
+    postDescription: Joi.string().trim().empty().required(),
     postBody: Joi.string().empty().required(),
     allowComments: Joi.bool().required(),
     status: Joi.string().required()

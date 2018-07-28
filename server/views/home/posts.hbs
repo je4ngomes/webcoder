@@ -1,33 +1,64 @@
-<!DOCTYPE html>
-<html lang="en"/>
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="./node_modules/font-mfizz/dist/font-mfizz.css"/>
-    <link rel="stylesheet" href="./node_modules/hover.css/css/hover-min.css"/>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <title>CodeWeb</title>
-</head>
-<body>
-    {{> header}}
-
-    <div class="container">
-        <div class="row">
-            <main class="main col col-md-9">
-                <div class="main__title">
-                    <h1 class="">About</h1>
-                </div>
-                
-            </main>
-  
-            {{> aside}}
+<div class="content">
+    <div class="row">
+        <div class="main__title" style="position:relative; top: 30px;">
+            <h1 class="">Posts</h1>
         </div>
+
+        <main class="main col">
+            
+            {{#if recentPosts}}
+                <div class="row">
+                    {{#each articles}}
+                        <div class="col col-sm-6 col-md-3">
+                            <article class="articles">
+                                <div class="img-scale">
+                                    <a href="/posts/view/{{id}}"><img style="cursor:pointer;" src="{{this.coverPhoto}}" alt=""></a>
+                                </div>
+                                <h1>{{this.title}}</h1>
+                                <p class="article__description">{{this.description}}</p>
+                                <a href="/posts/view?p={{id}}"><button style="cursor:pointer;" class="btn">Read More</button></a>
+                            </article>
+                        </div>
+                    {{/each}}
+                </div>
+
+                <ul class="pagination">
+                    <li class="btn__prev"><a href="/posts?page={{pagination.prev}}">prev</a></li>
+                    <li class="current">{{pagination.current}}</li>
+                    <li class="limit">{{pagination.pages}}</li>
+                    <li class="btn__next"><a href="/posts?page={{pagination.next}}">next</a></li> 
+                </ul>
+            {{else}}
+                <h1 class="noposts">No posts to show</h1>
+            {{/if}}
+
+        </main>
+
     </div>
-    {{> footer}}
+</div>
 
+<script>
+    const descriptions = [...document.querySelectorAll('.article__description')];
+    const greaterThan = descriptions.filter(el => el.textContent.length > 75);
 
-    <script src="js/script.js"></script>
-</body>
-</html>
+    greaterThan.forEach(el => 
+        (el.textContent = el.textContent.slice(null, 75) + '...')
+    );
+
+    const movers = [...document.querySelectorAll('.pagination .btn__prev, .pagination .btn__next')];
+    const isPageMoveDefined = (element) => {
+        const page = element.firstChild.getAttribute('href')
+            .split('=')[1];
+
+        return (page === '' ? undefined : page);
+    };
+
+    const disableBtn = (btn) => {
+        if (!isPageMoveDefined(btn)) {
+            btn.classList.add('disabled');
+            btn.firstChild.removeAttribute('href');
+        }
+    };
+
+    movers.map(disableBtn);
+</script>

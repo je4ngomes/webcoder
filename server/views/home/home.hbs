@@ -4,32 +4,18 @@
             <div class="main__title">
                 <h1 class="">Recent Posts</h1>
             </div>
+
             {{#if recentPosts}}
                 <div class="row">
-                    {{#each articles_first_row}}
-                        <div class="col col-sm-4">
+                    {{#each articles}}
+                        <div class="col col-sm-6 col-md-4">
                             <article class="articles">
                                 <div class="img-scale">
-                                    <img src="{{this.urlImg}}" alt="">
+                                    <a href="/posts/view/{{id}}"><img style="cursor:pointer;" src="{{this.coverPhoto}}" alt=""></a>
                                 </div>
                                 <h1>{{this.title}}</h1>
-                                <p>{{this.paragraph}}</p>
-                                <button class="btn">Read More</button>
-                            </article>
-                        </div>
-                    {{/each}}
-                </div>
-                
-                <div class="row">
-                    {{#each articles_second_row}}
-                        <div class="col col-sm-4">
-                            <article class="articles">
-                                <div class="img-scale">
-                                    <img src="{{this.urlImg}}" alt="">
-                                </div>
-                                <h1>{{this.title}}</h1>
-                                <p>{{this.paragraph}}</p>
-                                <button class="btn">Read More</button>
+                                <p class="article__description">{{this.description}}</p>
+                                <a href="/posts/view?p={{id}}"><button style="cursor:pointer;" class="btn">Read More</button></a>
                             </article>
                         </div>
                     {{/each}}
@@ -42,3 +28,13 @@
         {{> home/home-aside}}
     </div>
 </div>
+<script>
+    const descriptions = [...document.querySelectorAll('.article__description')];
+    const greaterThan = descriptions.filter(el => el.textContent.length > 75);
+
+    greaterThan.forEach(el => 
+        (el.textContent = el.textContent.slice(null, 75) + '...')
+    );
+    
+
+</script>

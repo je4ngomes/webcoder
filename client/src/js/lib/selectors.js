@@ -17,6 +17,11 @@ export const login = {
 export const posts = {
     postForm: '.post__form',
     editForm: '.edit__form',
+    prevAndNext: '.btn__prev, .btn__next',
+    btnDelete: '.btn__delete',
+    postList: '.posts',
+    coverLabel: '.top__inputs label[for=coverPhoto]',
+    postCover: '.top__inputs input[type=file]',
     allowComments: 'form input[type=checkbox]',
     fields: 'form input, form select, form textarea'
 };

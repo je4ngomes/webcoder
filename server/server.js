@@ -2,8 +2,8 @@ const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const Boom = require('express-boom');
+
 const exphbs = require('express-handlebars');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
@@ -23,7 +23,8 @@ const hbs = exphbs.create({
                     `value="${selected}"`, 
                     `value="${selected}" selected`
                 );
-        }
+        },
+        isAdmin: user => (user ? '/admins/dashboard' : '/users/dashboard')
     },
     defaultLayout: 'main',
     partialsDir: 'views/partials/'
@@ -48,20 +49,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors());
 app.use(Boom());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // load routes
 app.use('/', mainRoute);
 app.use('/auth', authRoute);
 app.use('/users', userRoute);
 
-app.use((err, req, res, next) => {
-    if (err.error.isJoi) {
-        res.status(400).redirect('/400');
-    } else {
-        next(err);
-    }
-});
+app.disable('x-powered-by');
 
 
 app.listen(

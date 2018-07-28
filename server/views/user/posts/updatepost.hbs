@@ -10,6 +10,10 @@
             
         <form class="edit__form">
             <div class="top__inputs">
+                <label for="coverPhoto">Cover Photo</label>
+                <input type="file" name="coverPhoto" accept=".jpg, .jpeg, .png" id="coverPhoto">
+
+
                 <input type="checkbox" {{#if isChecked}}checked{{/if}} name="allowComments" id="allowComments"/>
                 <label for="allowComments">allow Comments</label>
 
@@ -27,8 +31,9 @@
             
             <div class="main__inputs">
                 <input type="text" class="form__title" name="postTitle" placeholder="# Title" autocomplete="off" value="{{title}}" autofocus required/>
+                <input type="text" name="postDescription" placeholder="Description" autocomplete="off" value="{{description}}" autofocus required/>
 
-                <textarea class="post_body" name="postBody" id="" placeholder="Tell your story..." required>{{body}}</textarea>
+                <textarea  class="post_body" name="postBody" id="" placeholder="Tell your story..." required>{{body}}</textarea>
             </div>
             
         </form>

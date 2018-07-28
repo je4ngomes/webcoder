@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^4.1.1",
-    "font-mfizz": "^2.4.1"
+    "font-mfizz": "^2.4.1",
+    "import": "0.0.6"
   }
 }

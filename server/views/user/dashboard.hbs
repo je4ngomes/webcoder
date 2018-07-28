@@ -5,29 +5,31 @@
     
     <main>
         <div class="row">
-            <div class="col-12 col-sm-5 col-md-3 offset-md-3 offset-sm-1 posts__counter">
+            <div class="col-12 col-sm-5 col-md-3 offset-md-1 offset-sm-3 posts__counter">
                 <h1>Posts</h1> 
-                <span>--</span>
-            </div>
-            
-            <div class="col-12 col-sm-5 col-md-3 pending__counter">
-                <h1>Pending Posts</h1>
-                <span>--</span>
+                <span>
+                    {{#if totalPosts}}
+                        {{totalPosts}}
+                    {{else}}
+                        --
+                    {{/if}}
+                </span>
             </div>
         </div>
         
         <div class="row">
-            <div class="col latest__post">
+            <div class="col-11 latest__post">
                 <h1>Latest Post</h1>
                 <div class="card row">
-                    <div class="card__img col-12 col-md-3"><img src="https://cdn-images-1.medium.com/max/1600/1*HP8l7LMMt7Sh5UoO1T-yLQ.png" alt=""></div>
-                    <div class="card__content col-12 col-md-8">
-                        <a class="card__title" href=""><h1>JavaScript Guide part 1</h1></a>
-                        <p class="card__description">Dolore tempor id nisi in. Id proident aute aliquip dolore officia 
-                            culpa aute sint elit ad. Quis incididunt ea anim labore. Et ex culpa commodo amet ex 
-                            laboris labore sit id ad magna adipisicing. Dolor excepteur excepteur qui sit tempor 
-                            dolore nostrud eu. Occaecat quis laboris aliqua ad nisi cupidatat nisi occaecat eu cillum do...</p>
-                    </div>
+                    {{#if post.latestPost}}
+                        <div class="card__img col-12 col-md-3"><img src="{{post.thumb}}" alt=""></div>
+                        <div class="card__content col-12 col-md-8">
+                            <a class="card__title" href="/posts/view?p={{post.id}}"><h1>{{post.title}}</h1></a>
+                            <p class="card__description">{{post.description}}...</p>
+                        </div>
+                    {{else}}
+                        <h3>No post to show.</h3>
+                    {{/if}}
                 </div>
             </div>
         </div>

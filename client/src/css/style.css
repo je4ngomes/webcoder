@@ -346,8 +346,73 @@ footer .logo :nth-child(2) {
     margin-left: 3rem;
 }
 
+/*Pagination*/
+.pagination {
+    width: 15rem;
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    font-size: 0;
+    list-style-type: none;
+}
+
+.pagination li {
+    display: inline-block;
+    font-size: 14pt;
+    color: white;
+}
+
+.pagination .current,
+.pagination .limit {
+    padding: 8px 15px;
+    background: #3f3f3f;
+}
+
+.pagination .btn__prev, 
+.pagination .btn__next {
+    background: #3f3f3f;
+    transition: 0.5s;
+}
+
+.pagination .btn__prev:hover, 
+.pagination .btn__next:hover {
+    color: #252525;
+    background: #eeeeee;
+    transition: 0.5s;
+}
+
+.pagination .btn__prev:hover a, 
+.pagination .btn__next:hover a {
+    color: #252525;
+    transition: 0.5s;
+}
 
 
+.pagination li a {
+    text-decoration: none;
+    padding: 8px 15px;
+    display: inline-block;
+    color: white;
+    transition: 0.5s;
+}
+
+.pagination li:not(.btn__next) {
+    border-right: 1px solid #ffffff73;
+}
+
+.disabled {
+    background: rgba(209, 209, 209, 0.836) !important;
+    border-right: none !important;
+    transition: none !important;
+    cursor: default !important;
+}
+
+.disabled a {
+    color: black !important;
+    transition: none !important;
+    cursor: default !important;
+}
 
 /*End Footer*/
 

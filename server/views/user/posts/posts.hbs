@@ -8,13 +8,16 @@
             <thead>
                 <th>Title</th>
                 <th>Status</th>
-                <th>Created At</th>
+                <th>Creation</th>
                 <th>Allow Comments</th>
             </thead>
-            <tbody>
+            <tbody class="post__list">
                 {{#each articles}}
                     <tr>
-                        <td><a href="/posts/view/{{this.id}}">{{this.title}}</a></td>
+                        <td>
+                            <div class="post__image"><img src="{{this.image}}" alt=""></div>
+                            <a href="/posts/view?p={{this.id}}">{{this.title}}</a>
+                        </td>
                         <td>{{this.status}}</td>
                         <td>{{this.createdAt}}</td>
                         <td>{{this.allowComments}}</td>
@@ -28,7 +31,7 @@
         <ul class="pagination">
             <li class="btn__prev"><a href="/users/posts?page={{pagination.prev}}">prev</a></li>
             <li class="current">{{pagination.current}}</li>
-            <li class="limit">{{pagination.limit}}</li>
+            <li class="limit">{{pagination.pages}}</li>
             <li class="btn__next"><a href="/users/posts?page={{pagination.next}}">next</a></li> 
         </ul>
     </main>

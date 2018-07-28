@@ -3,7 +3,7 @@ const Joi = require('joi');
 const name = Joi.string().empty().trim().required();
 
 const loginSchema = Joi.object({
-    username: Joi.string().alphanum().required(),
+    username: Joi.string().required(),
     password: Joi.string().min(8).required()
 });
 

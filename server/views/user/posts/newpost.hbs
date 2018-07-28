@@ -10,6 +10,9 @@
 
         <form class="post__form">
             <div class="top__inputs">
+                <input type="file" name="coverPhoto" accept=".jpg, .jpeg, .png" id="coverPhoto">
+                <label for="coverPhoto">Cover Photo</label>
+
                 <input type="checkbox" name="allowComments" id="allowComments"/>
                 <label for="allowComments">allow Comments</label>
 
@@ -25,8 +28,9 @@
             
             <div class="main__inputs">
                 <input type="text" class="form__title" name="postTitle" placeholder="Title" autocomplete="off" autofocus required/>
-
-                <textarea class="post_body" name="postBody" id="" placeholder="Tell your story..." required></textarea>
+                <input type="text" name="postDescription" placeholder="Description" autocomplete="off" autofocus required/>
+                
+                <textarea  class="post_body" name="postBody" id="textarea_id" placeholder="Tell your story..." required></textarea>
             </div>
             
         </form>

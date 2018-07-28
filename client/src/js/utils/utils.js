@@ -1,22 +1,18 @@
-const postData = (url, body) => {
+const postData = (url, body, headers = {}) => {
     return fetch(url, {
         method: "POST",
         mode: 'cors',
-        body: JSON.stringify(body),
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        body: body,
+        headers
     });
 };
 
+const deleteData = (url) => fetch(url, { method: 'DELETE', mode: 'cors' });
 const updateData = (url, body) => {
     return fetch(url, {
-        method: "PATCH",
+        method: "PUT",
         mode: 'cors',
-        body: JSON.stringify(body),
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        body: body
     });
 }
 
@@ -42,14 +38,35 @@ const getQueryFrom = (url) => {
     return query[0];
 };
 
+const autoExpand = (element) => {
+    const field = element.target || element;
+
+	// Reset field height
+	field.style.height = 'inherit';
+
+	// Get the computed styles for the element
+	const computed = window.getComputedStyle(field);
+
+	// Calculate the height
+	const height = parseInt(computed.getPropertyValue('border-top-width'), 10)
+	             + parseInt(computed.getPropertyValue('padding-top'), 10)
+	             + field.scrollHeight
+	             + parseInt(computed.getPropertyValue('padding-bottom'), 10)
+	             + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+	field.style.height = height + 'px';
+};
+
 export {
     isEmpty,
     getElement,
     getElements,
     getQueryFrom,
     formatObj,
+    deleteData,
     isValidRedirection,
     pipe,
+    autoExpand,
     updateData,
     postData
 };

@@ -1,0 +1,26 @@
+{{!-- <main>
+
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.js"></script>
+<script>
+    const docs = [];
+
+    for (let i = 0; i <= 200; i++) {
+        fetch('/users/posts/faker', {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify({
+                title: faker.lorem.words(4),
+                body: faker.lorem.paragraph(10),
+                status: 'private',
+                description: faker.lorem.sentences(),
+                coverPic: 'https://picsum.photos/420/320?image=' + i,
+                coverPicID: faker.random.uuid,
+                allowComments: true,
+                createdAt: Date.now()}),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+    }
+</script> --}}

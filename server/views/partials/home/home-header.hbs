@@ -1,7 +1,7 @@
 <header class="header">
     <h1>WebCoder</h1>
     {{#if isLogged}}
-        <div class="signin"><a href="{{dashboardLink}}">Dashboard</a></div>
+        <div class="signin"><a href="{{#isAdmin admin}}{{/isAdmin}}">Dashboard</a></div>
     {{else}}
         <div class="signin"><a href="/auth">Sign in</a></div>
     {{/if}}

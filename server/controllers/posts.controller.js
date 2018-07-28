@@ -1,50 +1,42 @@
 const moment = require('moment');
+
 const { Article } = require('../models');
+const { genPaginationObj } = require('../utils');
 
 const renderTableOfPosts = (req, res) => {
-    const pag = parseInt(req.query.page) || 1;
-    const size = 10;
+    const page = parseInt(req.query.page) || 1;
+    const size = 9;
     const query = {
-        skip: size * (pag - 1),
+        skip: size * (page - 1),
         limit: size
     };
     
     Article.count({ createdBy: req.user.id })
-        .then(totalCounts => {            
-            const pageLimit = Math.floor(totalCounts / size);
-            const limit = pageLimit ? pageLimit : 1;
-            const pagination = {
-                current: pag,
-                limit,
-                prev: pag === 1 ? null : (pag - 1),
-                next: pag === limit ? null : (pag + 1)
-            };
+        .then(totalCounts => { 
+                       
+            const pagination = genPaginationObj(page, totalCounts);
             
-            Article.find({ createdBy: req.user.id }, {}, query)
+            Article.find({ createdBy: req.user.id }, {}, query).sort({_id: -1})
                 .then(articles => {
                     if (!articles) return res.boom.notFound();
 
                     res.render('user/posts/posts', {
                         articles: articles.map(article => ({
                             id: article._id,
+                            image: article.coverPic,
                             title: article.title,
-                            createdAt: moment(article.createdAt).format('L'),
+                            createdAt: moment(article.createdAt).format('lll'),
                             status: article.status,
                             allowComments: article.allowComments
                             })),
-                        pagination,
-                        firstname: req.user.firstname,
-                        lastname: req.user.lastname
+                        pagination
                     });
                 });
         });
 };
 
 const renderNewPostPage = (req, res) => {
-    res.render('user/posts/newpost', {
-        firstname: req.user.firstname,
-        lastname: req.user.lastname
-    });
+    res.render('user/posts/newpost');
 };
 
 const renderEditPostPage = (req, res) => {
@@ -56,6 +48,7 @@ const renderEditPostPage = (req, res) => {
             res.render('user/posts/updatepost', {
                 title: article.title,
                 body: article.body,
+                description: article.description,
                 selected: article.status,
                 isChecked: article.allowComments
             });     
@@ -64,19 +57,23 @@ const renderEditPostPage = (req, res) => {
 
 const createNewPost = (req, res) => {
     const body = req.body;
+
     const article = new Article({
         title: body.postTitle,
         body: body.postBody,
         status: body.status,
+        description: body.postDescription,
+        coverPic: req.file.cloudStoragePublicUrl,
+        coverPicID: req.file.cloudStorageObject,
         allowComments: body.allowComments,
-        createdAt: Date.now(),
         createdBy: req.user.id
     });
-
+    
     article.save()
-        .then(post => {
-            if (!post)
+        .then(article => {
+            if (!article)
                 return res.boom.badImplementation();
+
             res.send({});
         })
         .catch(err => {
@@ -91,13 +88,21 @@ const updatePost = (req, res) => {
         title: body.postTitle,
         body: body.postBody,
         status: body.status,
+        description: body.postDescription,
         allowComments: body.allowComments
     };
+
+    // if files exists then update it
+    if (req.file && req.file.cloudStoragePublicUrl) {
+        toUpdate.coverPicID = req.file.cloudStorageObject;
+        toUpdate.coverPic = req.file.cloudStoragePublicUrl;
+    }
+
     Article.findByIdAndUpdate(
         req.params.id, 
         {$set: toUpdate}
-    ).then(post => {
-        if (!post)
+    ).then(article => {
+        if (!article)
             return res.boom.badImplementation();
         
         res.send({});
@@ -110,7 +115,16 @@ const updatePost = (req, res) => {
 };
 
 const deletePost = (req, res) => {
-
+    Article.findByIdAndRemove(req.params.id)
+        .then(doc => {
+            if (!doc)
+                return res.boom.notFound();
+            res.send({});
+        })
+        .catch(err => {
+            console.error(err);
+            res.boom.badImplementation();
+        });
 };
 
 module.exports = {
