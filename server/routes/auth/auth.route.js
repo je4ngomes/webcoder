@@ -22,12 +22,18 @@ authRoute
     .get('/confirmation/:token', [auth.isAccountConfirmed, auth.validTokenConfirmation]);
 
 authRoute
-    .post('/login',validator.body(loginSchema), auth.authenticate)
+    .post('/login',[
+        validator.body(loginSchema),
+        auth.setIndentityKey,
+        auth.checkLoginAttempts, 
+        auth.authenticate
+    ])
     .post('/register', validator.body(registerSchema), authCtrl.signUp)
     .post('/check/username', authCtrl.validUsername)
     .post('/check/email', authCtrl.validEmail);
 
 authRoute.use((err, req, res, next) => {
+    console.log(err)
     if (err.error.isJoi) {
         return res.status(400).json({
             type: err.type.body,

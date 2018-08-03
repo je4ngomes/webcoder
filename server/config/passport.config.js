@@ -21,7 +21,7 @@ passport.use(new LocalStratety((username, password, done) => {
                     })
                     .catch(err => done(null, user, errorMsg));
         })
-        .catch(err => console.log(err) && done(err));
+        .catch(err => done(err));
 
     }
 ));

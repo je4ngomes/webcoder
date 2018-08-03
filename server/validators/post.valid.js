@@ -7,6 +7,11 @@ const postSchema = Joi.object({
     allowComments: Joi.bool().required(),
     status: Joi.string().required()
 });
-const ObjectId = { id: Joi.string().regex(/^[0-9a-fA-F]{24}$/, 'valid mongo id') };
+
+const id = Joi.string().regex(/^[0-9a-fA-F]{24}$/);
+const ObjectId = { 
+    id,
+    p: id.required().optional()
+};
 
 module.exports = { postSchema, ObjectId };

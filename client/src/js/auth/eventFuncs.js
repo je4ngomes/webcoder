@@ -103,7 +103,7 @@ const submitLogin = (e) => {
 
     postData(`auth/login${query}`, JSON.stringify(body), {'Content-type': 'application/json'})
         .then(async res => {
-            if (res.bodyUsed)
+            if (res.status !== 200)
                 throw await res.json();
             return res;
         })

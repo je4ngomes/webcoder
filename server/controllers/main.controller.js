@@ -1,6 +1,6 @@
 const { Article } = require('../models');
 const { genPaginationObj } = require('../utils');
-
+const marked = require('marked');
 
 const renderHomePage = (req, res) => {
 
@@ -39,8 +39,8 @@ const renderPostsPage = (req, res) => {
         skip: size * (page - 1),
         limit: size
     };
-
-    Article.count({ createdBy: req.user.id })
+    
+    Article.count({})
         .then(totalCounts => { 
                  
             const pagination = genPaginationObj(page, totalCounts, size);            
@@ -76,7 +76,30 @@ const renderPostsPage = (req, res) => {
 };
 
 const renderAboutPage = (req, res) => {
-    res.render('home/about');
+    res.render('home/about', { 
+        isLogged: req.isAuthenticated(), 
+        admin: req.user.isAdmin 
+    });
+};
+
+const renderViewPage = (req, res) => {
+    //reset layout
+    res.locals.layout = '';
+
+    const post = req.query.p;
+
+    Article.findById(post)
+        .then(article => {
+            if (!article)
+                return res.boom.notFound();
+
+            res.render('home/view', {
+                isLogged: req.isAuthenticated(),
+                title: article.title,
+                coverPhoto: article.coverPic,
+                body: marked(article.body)
+            });
+        });
 };
 
 const logOut = (req, res) => {
@@ -88,5 +111,6 @@ module.exports = {
     renderHomePage,
     renderPostsPage,
     renderAboutPage,
+    renderViewPage,
     logOut
 };

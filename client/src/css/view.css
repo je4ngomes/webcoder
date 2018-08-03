@@ -1,0 +1,271 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #333333;
+}
+
+.markdown-body {
+	box-sizing: border-box;
+	min-width: 200px;
+	max-width: 980px;
+	margin: 0 auto;
+	padding: 45px;
+}
+
+@media (max-width: 767px) {
+	.markdown-body {
+		padding: 15px;
+	}
+}
+
+.navbar {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    background-color: #131313;
+}
+
+.navbar__content {
+    width: 90%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.logo {
+    color: white;
+    position: absolute;
+    left: 20px;
+    margin-right: 20px;
+}
+
+.logo i {
+    font-size: 20pt;
+    margin-right: 5px;
+    line-height: 50px;
+}
+
+.logo h2 {
+    display: inline;
+}
+
+.menu {
+    position: absolute;
+    left: 13rem;
+}
+
+.menu ul {
+    list-style-type: none;
+}
+
+.menu ul li {
+    float: left;
+}
+
+.menu ul li a, .login a {
+    text-decoration: none;
+    color: white;
+    line-height: 60px;
+    transition: color 0.2s;
+    font-weight: bold;
+}
+
+.menu ul li a:hover, .login a:hover {
+    color: #585858;
+    transition: color 0.2s;
+}
+
+.search__form {
+    position: absolute;
+    left: 40%;
+}
+
+.search__form form {
+    line-height: 60px;
+}
+
+.search__form input[type="text"] {
+    width: 20rem; height: 35px;
+    padding: 0 30px 0 20px;
+    color: white;
+    font-weight: bold;
+    background: #505050;
+    font-size: 12pt;
+    border: none;
+    border-radius: 20px;
+}
+
+.search__form input[type="text"]:focus {
+    background: #585858;
+}
+
+.search__form i {
+    color: white;
+    font-size: 14pt;
+    transition: color 0.3s;
+}
+
+.search__form button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 5px;
+}
+
+.search__form button:hover i {
+    color: #1d1d1d;
+    transition: color 0.3s;
+}
+
+.profile {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    border: 2px solid #ffffff49;
+    border-radius: 50%;
+    transition: border 0.3s;
+    width: 40px; height: 40px;
+}
+
+.login {
+    position: absolute;
+    right: 20px;
+}
+
+.profile:hover {
+    border: 2px solid #ffffffab;
+    transition: border 0.3s;
+}
+
+.profile img {
+    cursor: pointer;
+    border-radius: 50%;
+    width: 100%; height: 100%;
+}
+
+.content {
+    max-width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.createdby {
+    margin-bottom: 10px;
+}
+
+.profile__pic {
+    width: 70px; height: 70px;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.profile__pic img {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+}
+
+.profile__name {
+    display: inline-block;
+    position: relative;
+    color: white;
+    font-weight: bold;
+    top: -50px;
+}
+
+.profile__description {
+    display: inline-block;
+    position: relative;
+    top: -30px;
+    left: -5.8rem;
+    font-size: 11pt;
+    color: rgba(255, 255, 255, 0.842);
+    max-width: 500px;
+}
+
+.createdat {
+    display: inline-block;
+    position: relative;
+    top: -10px;
+    font-size: 10pt;
+    color: rgb(255, 255, 255);
+    left: -21.6rem;
+}
+
+main {
+    max-width: 100%;
+    color: white;
+    margin: 0 auto;
+}
+
+main .title {
+    font-size: 50px;
+}
+
+.cover__photo {
+    width: 90%; height: 100%;
+    margin: 20px auto 10px auto;
+}
+
+.cover__photo img {
+    width: 100%; height: 100%;
+}
+
+.article__content {
+    color: white !important;
+    font-size: 14pt !important;
+}
+
+.article__content pre {
+    background: #1d1d1d !important;
+}
+
+.article__content a {
+    color: #3e92ff !important;
+}
+
+.arrow_box {
+	position: relative;
+    width: 150px;
+    right: 53px;
+    top: 10px;
+    border-radius: 3px;
+	background: #ffffff;
+}
+
+.disabled {
+    display: none;
+}
+
+.arrow_box ul {
+    list-style-type: none;
+    padding: 10px;
+}
+
+.arrow_box ul a {
+    color: rgba(0, 0, 0, 0.6);
+    padding: 0 0px;
+    font-size: 11pt;
+    line-height: 36px;
+    text-decoration: none;
+}
+
+.arrow_box:after {
+	bottom: 100%;
+	left: 55%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(213, 213, 213, 0);
+	border-bottom-color: #ffffff;
+	border-width: 10px;
+	margin-left: -20px;
+}

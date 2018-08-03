@@ -1,4 +1,4 @@
-//const { User } = require('../models');
+const { User } = require('../models');
 
 const checkExistence = (type, value) => User.findOne({ [type]: value });
 
@@ -18,8 +18,14 @@ const genPaginationObj = (currentPage, docs, limit=9) => {
 // return previous or next page it depends on the context this function will be called
 const genPageNumber = (currentPage, page, pages=1) => currentPage === pages ? null : page;
 
+// delay responses to slow down bruteforce attempts
+const delayResponse = (response, delay=1000) => setTimeout(response, delay);
+const addMinutes = (min, timeOut) => new Date(timeOut).valueOf() + (min * 60000);
+
 
 module.exports = {
     checkExistence,
-    genPaginationObj
+    genPaginationObj,
+    delayResponse,
+    addMinutes
 };

@@ -28,13 +28,4 @@
         {{> home/home-aside}}
     </div>
 </div>
-<script>
-    const descriptions = [...document.querySelectorAll('.article__description')];
-    const greaterThan = descriptions.filter(el => el.textContent.length > 75);
-
-    greaterThan.forEach(el => 
-        (el.textContent = el.textContent.slice(null, 75) + '...')
-    );
-    
-
-</script>
+<script src="/src/js/home/main.home.js" type="module"></script>

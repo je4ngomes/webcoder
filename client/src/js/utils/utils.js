@@ -1,3 +1,5 @@
+import { posts as selectors } from '../lib/selectors.js';
+
 const postData = (url, body, headers = {}) => {
     return fetch(url, {
         method: "POST",
@@ -57,6 +59,41 @@ const autoExpand = (element) => {
 	field.style.height = height + 'px';
 };
 
+
+const resizeDescription = () => {
+    const descriptions = getElements('.article__description');
+    const greaterThan = descriptions.filter(el => el.textContent.length > 75);
+
+    greaterThan.forEach(el => 
+        (el.textContent = el.textContent.slice(null, 75) + '...')
+    );
+};
+
+
+const isPageMoveDefined = (element) => {
+    const page = element.firstChild.getAttribute('href')
+        .split('=')[1];
+    return (page === '' ? undefined : page);
+};
+
+const disableBtn = (btn) => {
+    if (!isPageMoveDefined(btn)) {
+        btn.classList.add('disabled');
+        btn.firstChild.removeAttribute('href');
+    }
+};
+
+const pagination = () => {
+
+    const movers = getElements(selectors.prevAndNext);
+    movers.map(disableBtn);
+
+};
+
+
+
+
+
 export {
     isEmpty,
     getElement,
@@ -66,6 +103,8 @@ export {
     deleteData,
     isValidRedirection,
     pipe,
+    pagination,
+    resizeDescription,
     autoExpand,
     updateData,
     postData

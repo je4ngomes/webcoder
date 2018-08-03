@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
-const { promisify } = require('util');
 
 const { passport, transporter } = require('../config');
-const { User } = require('../models');
+const { delayResponse, addMinutes } = require('../utils');
+const { User, Login } = require('../models');
 
-
+// if auth redirect user to
 const isAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
         return User.findById(req.user.id)
@@ -18,6 +18,7 @@ const isAuthenticated = (req, res, next) => {
     res.redirect(`/auth?redirectTo=${req.originalUrl}`);
 };
 
+// verify if use account is already confirmed
 const isAccountConfirmed = (req, res, next) => {
     if (req.isAuthenticated()) {
         return User.findById(req.user.id)
@@ -31,15 +32,28 @@ const isAccountConfirmed = (req, res, next) => {
     res.redirect(`/auth`);
 };
 
+// authenticate user
 const authenticate = (req, res, next) => {
     const redirectTo = req.query.redirectTo;
+    const indentityKey = req.indentityKey;
 
-    passport.authenticate('local', (err, user, info) => {
-        if (err)
-            return res.boom.badRequest('Unable to authenticate. Please try again.');
-        if (info)
-            return res.boom.unauthorized(info);
+    passport.authenticate('local', async (err, user, info) => {
+        if (err) 
+            return delayResponse(
+                () => res.boom.badRequest('Unable to authenticate. Please try again.')
+            );
         
+        if (info) {
+            // track failled attempts
+            await Login.failedLoginAttempt(indentityKey);   
+
+            return delayResponse(
+                () => res.boom.unauthorized(info)
+            );
+        }
+        // if  successfully authenticated then log in and remove failed attempts from `Login`        
+        Login.successfulLoginAttempt(indentityKey);
+
         req.logIn({ 
             firstname: user.name.first, 
             lastname: user.name.last, 
@@ -49,6 +63,15 @@ const authenticate = (req, res, next) => {
         }, (err) => {
             if (err) 
                 return next(err);
+
+            //regenerate new session
+            req.session.regenerate((err) => {
+                if (err) {
+                    return res.boom.badImplementation();
+                }
+                req.session.passport = req.user;
+            });
+
             if (user.isAdmin) 
                 return res.redirect(redirectTo || '/admins/dashboard');
             
@@ -57,12 +80,13 @@ const authenticate = (req, res, next) => {
     })(req, res, next);
 }
 
-const sendEmailConfirmation = async (req, res, next) => {
-    const token = await promisify(jwt.sign(
+// send email confirmation for user be able to log in
+const sendEmailConfirmation = (req, res, next) => {
+    const token = jwt.sign(
         {data: req.user.id}, 
         process.env.MAIL_SECRET, 
         { expiresIn: '24h' }
-    ));
+    );
 
     User.findById(req.user.id)
         .then(user => {
@@ -88,11 +112,37 @@ const sendEmailConfirmation = async (req, res, next) => {
 };
 
 
+// Check Login attempts, if it is under X than user can log in, if not return some response to the user
+const checkLoginAttempts = (req, res, next) => {
+
+    Login.findOne({ indentityKey: req.indentityKey })
+        .then(login => {
+            // if login doesn't exist or `failedAttempts` is under 5 call next
+            if (!login || login.failedAttempts < 5) return next();
+
+            const timeOut = Date.now() - addMinutes(1, login.timeout);
+            // timeOut greater or equals to 0 means the timeOut has expired and the user can log in
+            if (timeOut >= 0) {
+                return Login.remove({ indentityKey: req.indentityKey })
+                    .then(() => next());
+            };
+
+            res.boom.badImplementation('User has reached login attempts.');          
+            
+        })
+        .catch(err => {
+            console.error(err);
+            res.boom.badImplementation();
+        });
+
+};
+
+// validate token confirmation
 const validTokenConfirmation = async (req, res, next) => {
     const TOKEN = req.params.token;
     try {
 
-        const { data: userId } = await promisify(jwt.verify(TOKEN, process.env.MAIL_SECRET));
+        const { data: userId } = jwt.verify(TOKEN, process.env.MAIL_SECRET);
 
     } catch(err) {
 
@@ -120,11 +170,18 @@ const validTokenConfirmation = async (req, res, next) => {
         });
 };
 
+const setIndentityKey = (req, res, next) => {
+    req.indentityKey = `${req.body.username}-${req.ip}`;
+    next();
+};
+
 
 module.exports = {
     isAccountConfirmed,
     isAuthenticated,
     sendEmailConfirmation,
     validTokenConfirmation,
+    checkLoginAttempts,
+    setIndentityKey,
     authenticate
 };

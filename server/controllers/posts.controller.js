@@ -11,28 +11,30 @@ const renderTableOfPosts = (req, res) => {
         limit: size
     };
     
-    Article.count({ createdBy: req.user.id })
-        .then(totalCounts => { 
-                       
-            const pagination = genPaginationObj(page, totalCounts);
-            
-            Article.find({ createdBy: req.user.id }, {}, query).sort({_id: -1})
-                .then(articles => {
-                    if (!articles) return res.boom.notFound();
+    const 
+        articlesCount = Article.count({ createdBy: req.user.id }),
+        articles =  Article.find({ createdBy: req.user.id }, {}, query).sort({_id: -1});
 
-                    res.render('user/posts/posts', {
-                        articles: articles.map(article => ({
-                            id: article._id,
-                            image: article.coverPic,
-                            title: article.title,
-                            createdAt: moment(article.createdAt).format('lll'),
-                            status: article.status,
-                            allowComments: article.allowComments
-                            })),
-                        pagination
-                    });
-                });
-        });
+    Promise.all([articlesCount, articles])
+        .then(results => {
+            const [articlesCount, articles] = results;
+
+            if (!articles) return res.boom.notFound();
+
+            const pagination = genPaginationObj(page, articlesCount);
+
+            res.render('user/posts/posts', {
+                articles: articles.map(article => ({
+                    id: article._id,
+                    image: article.coverPic,
+                    title: article.title,
+                    createdAt: moment(article.createdAt).format('lll'),
+                    status: article.status,
+                    allowComments: article.allowComments
+                    })),
+                pagination
+            });
+        })
 };
 
 const renderNewPostPage = (req, res) => {
